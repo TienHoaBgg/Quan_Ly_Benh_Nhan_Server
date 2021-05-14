@@ -28,6 +28,8 @@ public interface Constants {
     String GET_BENHNHAN_DIEU_TRI = "/getAllBenhNhanDieuTri";
     String XUAT_VIEN = "/xuatvien";
     String NHAP_VIEN = "/nhapvien";
+    String GET_INFO = "/get-info";
+
     String URL_GET_ALL_BENHNHAN_DIEU_TRI = API + BENHNHAN + GET_BENHNHAN_DIEU_TRI;
     String URL_GET_ALL_BENHNHAN_CHO = API + BENHNHAN + GET_BENHNHAN_CHO;
     String URL_GET_ALL_BENHNHAN = API + BENHNHAN + ALL;
@@ -39,7 +41,7 @@ public interface Constants {
     String URL_DELETE_BENHNHAN = API + BENHNHAN + DELETE;
     String URL_BENH_NHAN_XUAT_VIEN = API + BENHNHAN + XUAT_VIEN;
     String URL_BENH_NHAN_NHAP_VIEN = API + BENHNHAN + NHAP_VIEN;
-
+    String URL_BENH_NHAN_GET_INFO = API + BENHNHAN + GET_INFO;
 
     ///==================================================
     // Phong Kham
@@ -50,7 +52,10 @@ public interface Constants {
 
     ///==================================================
     /// Benh an
+    String ALL_BENH_AN = "/all-benh-an";
+
     String URL_GET_ALL_BENHAN = API + BENHAN + ALL;
+    String URL_GET_ALL_BENHAN_BY_PHONE = API + BENHAN + ALL_BENH_AN;
     String URL_ADD_BENH_AN = API + BENHAN + ADD;
     String URL_UPDATE_BENH_AN = API + BENHAN + UPDATE;
 

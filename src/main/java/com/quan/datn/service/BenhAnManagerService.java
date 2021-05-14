@@ -14,4 +14,6 @@ public interface BenhAnManagerService {
     Object addDonThuoc(DonThuocModel request) throws ExceptionResponse;
 
     Object updateBenhAn(BenhAn request) throws ExceptionResponse;
+
+    Object getAllBenhAnByPhoneNumber(String phoneNumber) throws ExceptionResponse;
 }

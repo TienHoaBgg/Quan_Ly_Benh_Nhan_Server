@@ -10,6 +10,7 @@ import com.quan.datn.model.request.AddBenhNhanRequest;
 import com.quan.datn.model.request.LoginRequest;
 import com.quan.datn.model.request.UpdatePassRequest;
 import com.quan.datn.service.BenhNhanManagerService;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
+import static com.quan.datn.common.MessageResponse.AN_UNKNOWN_ERROR;
 import static com.quan.datn.common.MessageResponse.INVALID_TOKEN;
 
 @RestController
@@ -26,6 +28,12 @@ public class BenhNhanController {
     @Autowired
     private BenhNhanManagerService service;
 
+    @GetMapping(value = Constants.URL_BENH_NHAN_GET_INFO)
+    public ResponseEntity getInfoBenhNhan(
+            @RequestParam(value = "phoneNumber") String phoneNumber
+    ) throws ExceptionResponse {
+        return new ResponseEntity<>(service.getInfoBenhNhan(phoneNumber), HttpStatus.OK);
+    }
     @GetMapping(value = Constants.URL_BENH_NHAN_XUAT_VIEN)
     public ResponseEntity xuatVien(
             @RequestParam(value = "mabn") String MaBN
@@ -61,8 +69,19 @@ public class BenhNhanController {
             @RequestParam(value = "avatar", required = false) MultipartFile file,
             @RequestParam(value = "profile") String request
     ) throws ExceptionResponse {
-        UpdateBenhNhanRequest benhNhanRequest = new Gson().fromJson(request, UpdateBenhNhanRequest.class);
-        return new ResponseEntity<>(service.updateBenhNhan(benhNhanRequest,file), HttpStatus.OK);
+        try {
+            String requestP = removeQuotesAndUnescape(request);
+            UpdateBenhNhanRequest benhNhanRequest = new Gson().fromJson(requestP, UpdateBenhNhanRequest.class);
+            return new ResponseEntity<>(service.updateBenhNhan(benhNhanRequest,file), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(AN_UNKNOWN_ERROR, HttpStatus.NOT_FOUND);
+    }
+
+    private String removeQuotesAndUnescape(String uncleanJson) {
+        String noQuotes = uncleanJson.replaceAll("^\"|\"$", "");
+        return StringEscapeUtils.unescapeJava(noQuotes);
     }
 
     @PostMapping(value = Constants.URL_LOGIN)
