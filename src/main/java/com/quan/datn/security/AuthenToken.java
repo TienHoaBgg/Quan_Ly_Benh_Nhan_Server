@@ -3,6 +3,7 @@ package com.quan.datn.security;
 
 import com.quan.datn.common.Constants;
 import com.quan.datn.model.database.BenhNhan;
+import com.quan.datn.model.database.NhanVien;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.joda.time.LocalDateTime;
@@ -18,6 +19,19 @@ public class AuthenToken {
                 .claim("MaBN",benhNhan.getMaBN())
                 .claim("CMND", benhNhan.getCmnd())
                 .claim("display_name",benhNhan.getHo() + benhNhan.getTen())
+                .setIssuer("no comment")
+                .setExpiration(new Date(LocalDateTime.now().toDate().getTime() + 30*24*60*60*1000L))
+                .signWith(SignatureAlgorithm.HS512, Constants.KEY_TOKEN.getBytes())
+                .compact();
+    }
+
+    public static String generateToken(NhanVien nhanVien) {
+        return Jwts.builder().setId(nhanVien.getId() + "")
+                .setIssuedAt(LocalDateTime.now().toDate())
+                .setSubject(String.valueOf(nhanVien.getId()))
+                .claim("MaBN",nhanVien.getMaNV())
+                .claim("CMND", nhanVien.getCmnd())
+                .claim("display_name",nhanVien.getHo() + nhanVien.getTen())
                 .setIssuer("no comment")
                 .setExpiration(new Date(LocalDateTime.now().toDate().getTime() + 30*24*60*60*1000L))
                 .signWith(SignatureAlgorithm.HS512, Constants.KEY_TOKEN.getBytes())

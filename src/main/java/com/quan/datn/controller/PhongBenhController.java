@@ -18,22 +18,22 @@ public class PhongBenhController {
     private PhongBenhManagaerService service;
 
     @GetMapping(value = Constants.URL_GET_ALL_PHONG_BENH)
-    public ResponseEntity getAllPhongBenh() throws ExceptionResponse {
-        return new ResponseEntity(service.getALlPhongBenh(), HttpStatus.OK);
+    public Object getAllPhongBenh() throws ExceptionResponse {
+        return new ResponseEntity<>(service.getALlPhongBenh(), HttpStatus.OK);
     }
 
     @PostMapping(value = Constants.URL_ADD_PHONG_BENH)
-    public ResponseEntity addPhongBenh(
+    public Object addPhongBenh(
             @RequestBody @Valid AddPhongBenhRequest request
     ) throws ExceptionResponse {
-        return new ResponseEntity(service.addPhongBenh(request),HttpStatus.OK);
+        return new ResponseEntity<>(service.addPhongBenh(request),HttpStatus.OK);
     }
 
     @GetMapping(value = Constants.URL_DELETE_PHONG_BENH)
-    public ResponseEntity deletePhongBenh(
+    public Object deletePhongBenh(
             @RequestParam("mapb") String maPB
     ) throws ExceptionResponse {
-        return new ResponseEntity(service.deletePhongBenh(maPB),HttpStatus.OK);
+        return new ResponseEntity<>(service.deletePhongBenh(maPB),HttpStatus.OK);
     }
 
 }

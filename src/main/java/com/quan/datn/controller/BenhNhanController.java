@@ -27,14 +27,14 @@ public class BenhNhanController {
     private BenhNhanManagerService service;
 
     @GetMapping(value = Constants.URL_BENH_NHAN_XUAT_VIEN)
-    public ResponseEntity xuatVien(
+    public Object xuatVien(
             @RequestParam(value = "mabn") String MaBN
     ) throws ExceptionResponse {
         return new ResponseEntity<>(service.xuatVien(MaBN), HttpStatus.OK);
     }
 
     @GetMapping(value = Constants.URL_BENH_NHAN_NHAP_VIEN)
-    public ResponseEntity nhapVien(
+    public Object nhapVien(
             @RequestParam(value = "mabn") String MaBN
     ) throws ExceptionResponse {
         return new ResponseEntity<>(service.nhapVien(MaBN), HttpStatus.OK);
@@ -50,7 +50,7 @@ public class BenhNhanController {
     }
 
     @GetMapping(value = Constants.URL_DELETE_BENHNHAN)
-    public ResponseEntity deleteBenhNhan(
+    public Object deleteBenhNhan(
             @RequestParam(value = "mabn") String MaBN
     ) throws ExceptionResponse {
         return new ResponseEntity<>(service.deleteBenhNhan(MaBN), HttpStatus.OK);
@@ -93,17 +93,17 @@ public class BenhNhanController {
     }
 
     @GetMapping(value = Constants.URL_GET_ALL_BENHNHAN)
-    public ResponseEntity getAllBenhNhan() throws ExceptionResponse {
+    public Object getAllBenhNhan() throws ExceptionResponse {
         return new ResponseEntity<>(service.getAllBenhNhan(), HttpStatus.OK);
     }
 
     @GetMapping(value = Constants.URL_GET_ALL_BENHNHAN_CHO)
-    public ResponseEntity getAllBenhNhanCho() throws ExceptionResponse {
+    public Object getAllBenhNhanCho() throws ExceptionResponse {
         return new ResponseEntity<>(service.getAllBenhNhanCho(), HttpStatus.OK);
     }
 
     @GetMapping(value = Constants.URL_GET_ALL_BENHNHAN_DIEU_TRI)
-    public ResponseEntity getAllBenhNhanDieuTri(
+    public Object getAllBenhNhanDieuTri(
             @RequestHeader(value = "Authorization", required = false) String token
     ) throws ExceptionResponse {
         return new ResponseEntity<>(service.getAllBenhNhanDieuTri(), HttpStatus.OK);

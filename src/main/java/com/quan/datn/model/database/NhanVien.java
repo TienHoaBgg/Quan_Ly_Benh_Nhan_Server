@@ -28,6 +28,8 @@ public class NhanVien {
     private String viTri;
     private String email;
     private String sdt;
+    private String password;
+    private String accessToken;
     private String ngayVaoLam;
 
     public int getId() {
@@ -164,5 +166,21 @@ public class NhanVien {
 
     public void setNgayVaoLam(String ngayVaoLam) {
         this.ngayVaoLam = ngayVaoLam;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 }

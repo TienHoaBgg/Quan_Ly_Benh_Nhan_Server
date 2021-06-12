@@ -25,17 +25,17 @@ public class PhongKhamController {
     }
 
     @PostMapping(value = Constants.URL_ADD_PHONG_KHAM)
-    public ResponseEntity addPhongKham(
+    public Object addPhongKham(
             @RequestBody @Valid AddPhongKhamRequest request
     ) throws ExceptionResponse {
-        return new ResponseEntity(service.addPhongKham(request),HttpStatus.OK);
+        return new ResponseEntity<>(service.addPhongKham(request),HttpStatus.OK);
     }
 
     @GetMapping(value = Constants.URL_DELETE_PHONG_KHAM)
-    public ResponseEntity deletePhongKham(
+    public Object deletePhongKham(
             @RequestParam("mapk") String maPK
     ) throws ExceptionResponse {
-        return new ResponseEntity(service.deletePhongKham(maPK),HttpStatus.OK);
+        return new ResponseEntity<>(service.deletePhongKham(maPK),HttpStatus.OK);
     }
 
 }

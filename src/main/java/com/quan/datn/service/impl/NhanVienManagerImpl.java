@@ -4,6 +4,8 @@ package com.quan.datn.service.impl;
 import com.quan.datn.common.ExceptionResponse;
 import com.quan.datn.manager.NhanVienManager;
 import com.quan.datn.model.database.NhanVien;
+import com.quan.datn.model.request.LoginRequest;
+import com.quan.datn.model.request.UpdatePassRequest;
 import com.quan.datn.service.NhanVienManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +41,15 @@ public class NhanVienManagerImpl implements NhanVienManagerService {
     @Override
     public Object addNhanVien(NhanVien addRequest, MultipartFile file) throws ExceptionResponse {
         return manager.addNhanVien(addRequest,file);
+    }
+
+    @Override
+    public Object login(LoginRequest request) throws ExceptionResponse {
+        return manager.login(request);
+    }
+
+    @Override
+    public Object updatePassword(UpdatePassRequest request) throws ExceptionResponse {
+        return manager.updatePassword(request);
     }
 }

@@ -73,6 +73,8 @@ public interface Constants {
     String URL_DELETE_NHAN_VIEN = API + NHANVIEN + DELETE;
     String URL_UPDATE_NHAN_VIEN = API + NHANVIEN + UPDATE;
     String URL_ADD_NHAN_VIEN = API + NHANVIEN + ADD;
+    String URL_NHANVIEN_LOGIN = API + NHANVIEN + LOGIN;
+    String URL_NHANVIEN_UPDATE_PASS = API + NHANVIEN + UPDATE_PASS;
 
     ///===================================================
     // Bao Cao
