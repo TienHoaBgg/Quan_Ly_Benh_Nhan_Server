@@ -33,6 +33,13 @@ public class BenhAnController {
         return new ResponseEntity(service.getAllBenhAn(maBN), HttpStatus.OK);
     }
 
+    @GetMapping(value = Constants.URL_GET_ALL_BENHAN_BY_PHONE)
+    public ResponseEntity getAllBenhAnByPhoneNumber(
+            @RequestParam(value = "phoneNumber") String phoneNumber
+    )throws ExceptionResponse {
+        return new ResponseEntity(service.getAllBenhAnByPhoneNumber(phoneNumber), HttpStatus.OK);
+    }
+
     @PostMapping(value = Constants.URL_ADD_BENH_AN)
     public ResponseEntity addBenhAn(
             @RequestBody @Valid BenhAn request

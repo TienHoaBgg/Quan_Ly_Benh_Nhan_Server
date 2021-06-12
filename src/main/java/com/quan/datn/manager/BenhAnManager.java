@@ -46,6 +46,15 @@ public class BenhAnManager {
         return new CommonResponse(HttpStatus.OK, benhAns.stream().map(this::exportBenhAn).collect(Collectors.toList()));
     }
 
+    public Object getAllBenhAnByPhoneNumber(String phoneNumber) throws ExceptionResponse{
+        BenhNhan benhNhan = benhNhanRepository.findByPhoneNumber(phoneNumber);
+        List<BenhAn> benhAns = benhAnRepository.findAllByMaBN(benhNhan.getMaBN());
+        if (benhAns == null || benhAns.size() <= 0) {
+            throw new ExceptionResponse(HttpStatus.FORBIDDEN, VALUES_NOT_EXITS);
+        }
+        return new CommonResponse(HttpStatus.OK, benhAns.stream().map(this::exportBenhAn).collect(Collectors.toList()));
+    }
+
     public Object addBenhAn(BenhAn request) throws ExceptionResponse {
         try {
             BenhNhan bn = benhNhanRepository.findByMaBN(request.getMaBN());
@@ -92,8 +101,14 @@ public class BenhAnManager {
         response.setChanDoanSauCung(benhAn.getChanDoanSauCung());
         response.setHuongDieuTri(benhAn.getHuongDieuTri());
         response.setPhongBenh(phongBenhRepository.findByMaPB(benhAn.getMaPB()));
-        response.setPhongKham(exportPhongKham(phongKhamRepository.findByMaPK(benhAn.getMaPK())));
-        response.setDonThuoc(donThuocRepository.getDonThuocByMaBA(benhAn.getMaBA()));
+        PhongKham pk = phongKhamRepository.findByMaPK(benhAn.getMaPK());
+        if (pk != null){
+            response.setPhongKham(exportPhongKham(pk));
+        }
+        List<DonThuoc> dts = donThuocRepository.getDonThuocByMaBA(benhAn.getMaBA());
+        if (dts != null && dts.size() > 0){
+            response.setDonThuoc(dts);
+        }
         return response;
     }
 
@@ -102,7 +117,10 @@ public class BenhAnManager {
         response.setId(phongKham.getId());
         response.setMaPK(phongKham.getMaPK());
         response.setTenPK(phongKham.getTenPK());
-        response.setBacSi(nhanVienRepository.findByMaNV(phongKham.getMaBS()));
+        NhanVien nv = nhanVienRepository.findByMaNV(phongKham.getMaBS());
+        if (nv != null){
+            response.setBacSi(nv);
+        }
         return response;
     }
 

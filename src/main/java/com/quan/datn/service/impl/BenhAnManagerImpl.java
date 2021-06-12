@@ -34,4 +34,9 @@ public class BenhAnManagerImpl implements BenhAnManagerService {
     public Object updateBenhAn(BenhAn request) throws ExceptionResponse {
         return manager.updateBenhAn(request);
     }
+
+    @Override
+    public Object getAllBenhAnByPhoneNumber(String phoneNumber) throws ExceptionResponse {
+        return manager.getAllBenhAnByPhoneNumber(phoneNumber);
+    }
 }

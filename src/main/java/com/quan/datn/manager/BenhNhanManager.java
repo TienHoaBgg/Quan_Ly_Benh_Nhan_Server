@@ -101,16 +101,22 @@ public class BenhNhanManager {
             throw new ExceptionResponse(HttpStatus.UNAUTHORIZED, USER_NOT_EXIST);
         }
         BenhNhan benhNhan = request.getBenhNhan();
-        benhNhan.setMatKhau(bn.getMatKhau());
-        benhNhan.setToken(bn.getToken());
+        bn.setCmnd(benhNhan.getCmnd());
+        bn.setHo(benhNhan.getHo());
+        bn.setTen(benhNhan.getTen());
+        bn.setGioiTinh(benhNhan.getGioiTinh());
+        bn.setNgaySinh(benhNhan.getNgaySinh());
+        bn.setNgheNghiep(benhNhan.getNgheNghiep());
+        bn.setDiaChi(benhNhan.getDiaChi());
+        bn.setSdt(benhNhan.getSdt());
         if (file != null) {
             OtherFile fileResponse = fileManager.upload(file);
             System.out.println("======================== File Path: " + fileResponse.getFilePath());
-            benhNhan.setAvatar(fileResponse.getFilePath());
+            bn.setAvatar(fileResponse.getFilePath());
         }
         try {
-            benhNhanRepository.save(benhNhan);
-            BaoCao baoCao = new BaoCao(benhNhan);
+            benhNhanRepository.save(bn);
+            BaoCao baoCao = new BaoCao(bn);
             baoCao.setNoiDung("Bệnh nhân được cập nhật thông tin");
             baoCaoRepository.save(baoCao);
             return new CommonResponse(HttpStatus.OK, apply(bn));
@@ -269,5 +275,13 @@ public class BenhNhanManager {
         } catch (Exception e) {
             throw new ExceptionResponse(HttpStatus.BAD_REQUEST, AN_UNKNOWN_ERROR);
         }
+    }
+
+    public Object getInfoBenhNhan(String phoneNumber) throws ExceptionResponse {
+        BenhNhan benhNhan = benhNhanRepository.findByPhoneNumber(phoneNumber);
+        if (benhNhan == null) {
+            throw new ExceptionResponse(HttpStatus.UNAUTHORIZED, USER_NOT_EXIST);
+        }
+        return new CommonResponse(HttpStatus.OK,apply(benhNhan));
     }
 }
