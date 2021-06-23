@@ -14,6 +14,8 @@ public class UpdateBenhNhanRequest {
     private String ngheNghiep;
     private String diaChi;
     private String sdt;
+    private long amount;
+    private String publicKey;
     private String trangThai;
 
     public int getId() {
@@ -96,6 +98,22 @@ public class UpdateBenhNhanRequest {
         this.sdt = sdt;
     }
 
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
+
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
+    }
+
     public String getTrangThai() {
         return trangThai;
     }
@@ -117,6 +135,8 @@ public class UpdateBenhNhanRequest {
         benhNhan.setNgheNghiep(this.getNgheNghiep());
         benhNhan.setDiaChi(this.getDiaChi());
         benhNhan.setSdt(this.getSdt());
+        benhNhan.setAmount(this.getAmount());
+        benhNhan.setPublicKey(this.getPublicKey());
         return benhNhan;
     }
 }

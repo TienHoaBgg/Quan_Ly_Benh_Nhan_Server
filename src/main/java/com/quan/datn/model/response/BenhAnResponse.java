@@ -24,6 +24,7 @@ public class BenhAnResponse {
     private String yeuCauThem;
     private String chanDoanSauCung;
     private String huongDieuTri;
+    private long chiPhi;
     private PhongKhamResponse phongKham;
     private PhongBenh phongBenh;
     private List<DonThuoc> donThuoc;
@@ -154,6 +155,14 @@ public class BenhAnResponse {
 
     public void setHuongDieuTri(String huongDieuTri) {
         this.huongDieuTri = huongDieuTri;
+    }
+
+    public long getChiPhi() {
+        return chiPhi;
+    }
+
+    public void setChiPhi(long chiPhi) {
+        this.chiPhi = chiPhi;
     }
 
     public PhongKhamResponse getPhongKham() {

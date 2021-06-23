@@ -34,6 +34,14 @@ public class BenhNhanController {
     ) throws ExceptionResponse {
         return new ResponseEntity<>(service.getInfoBenhNhan(phoneNumber), HttpStatus.OK);
     }
+
+    @GetMapping(value = Constants.URL_BENH_NHAN_GET_INFO_MABN)
+    public ResponseEntity getInfoByMabn(
+            @RequestParam(value = "mabn") String maBN
+    ) throws ExceptionResponse {
+        return new ResponseEntity<>(service.getInfoByMabn(maBN), HttpStatus.OK);
+    }
+
     @GetMapping(value = Constants.URL_BENH_NHAN_XUAT_VIEN)
     public Object xuatVien(
             @RequestParam(value = "mabn") String MaBN

@@ -18,6 +18,9 @@ public class BenhNhanResponse {
     private String diaChi;
     private String sdt;
     private String trangThai;
+    private long amount;
+    private long vienPhi;
+    private String publicKey;
     private String token;
     private BenhAnResponse benhAnResponse;
 
@@ -115,6 +118,30 @@ public class BenhNhanResponse {
 
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
+
+    public long getVienPhi() {
+        return vienPhi;
+    }
+
+    public void setVienPhi(long vienPhi) {
+        this.vienPhi = vienPhi;
+    }
+
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
     }
 
     public String getToken() {

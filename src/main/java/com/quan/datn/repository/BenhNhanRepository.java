@@ -17,6 +17,9 @@ public interface BenhNhanRepository extends JpaRepository<BenhNhan,Integer> {
     @Query(nativeQuery = true, value = "SELECT * FROM BENHNHAN  WHERE TRANGTHAI LIKE 'Đang chờ khám'")
     List<BenhNhan> findAllByBenhNhanCho();
 
+    @Query(nativeQuery = true, value = "SELECT * FROM BENHNHAN")
+    List<BenhNhan> findAllBenhNhan();
+
     @Query(nativeQuery = true, value = "SELECT * FROM BENHNHAN  WHERE SDT LIKE :SDT")
     BenhNhan findByPhoneNumber(
             @Param("SDT") String SDT

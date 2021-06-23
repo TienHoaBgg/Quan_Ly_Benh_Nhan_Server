@@ -24,9 +24,10 @@ public class BenhNhan {
     private String ngheNghiep;
     private String gioiTinh;
     private String matKhau;
+    private long amount;
+    private String publicKey;
     private String trangThai;
     private String token;
-
 
     public int getId() {
         return id;
@@ -122,6 +123,22 @@ public class BenhNhan {
 
     public void setMatKhau(String matKhau) {
         this.matKhau = matKhau;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
+
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
     }
 
     public String getTrangThai() {

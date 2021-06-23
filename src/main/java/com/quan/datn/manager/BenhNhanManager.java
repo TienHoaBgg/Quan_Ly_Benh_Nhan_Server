@@ -42,6 +42,9 @@ public class BenhNhanManager {
     private PhongKhamRepository phongKhamRepository;
 
     @Autowired
+    private DonThuocRepository donThuocRepository;
+
+    @Autowired
     private NhanVienRepository nhanVienRepository;
 
     @Autowired
@@ -61,7 +64,9 @@ public class BenhNhanManager {
                 benhNhan.setAvatar(fileResponse.getFilePath());
             }
             BenhNhan response = benhNhanRepository.save(benhNhan);
-            benhAnRepository.save(request.getBenhAn());
+            BenhAn benhAn = request.getBenhAn();
+            benhAn.setMaBN(response.getMaBN());
+            benhAnRepository.save(benhAn);
             BaoCao baoCao = new BaoCao(response);
             baoCao.setNoiDung("Bệnh nhân mới");
             baoCaoRepository.save(baoCao);
@@ -109,6 +114,9 @@ public class BenhNhanManager {
         bn.setNgheNghiep(benhNhan.getNgheNghiep());
         bn.setDiaChi(benhNhan.getDiaChi());
         bn.setSdt(benhNhan.getSdt());
+        bn.setTrangThai(benhNhan.getTrangThai());
+        bn.setAmount(benhNhan.getAmount());
+        bn.setPublicKey(benhNhan.getPublicKey());
         if (file != null) {
             OtherFile fileResponse = fileManager.upload(file);
             System.out.println("======================== File Path: " + fileResponse.getFilePath());
@@ -166,7 +174,7 @@ public class BenhNhanManager {
 
     public Object getAllBenhNhanCho() throws ExceptionResponse {
         List<BenhNhan> listBenhNhan = benhNhanRepository.findAllByBenhNhanCho();
-        if (listBenhNhan.size() <= 0) {
+        if (listBenhNhan == null || listBenhNhan.size() <= 0) {
             throw new ExceptionResponse(HttpStatus.FORBIDDEN, MessageResponse.VALUES_NOT_EXITS);
         }
         return new CommonResponse(HttpStatus.OK, listBenhNhan.stream().map(this::apply).collect(Collectors.toList()));
@@ -174,18 +182,23 @@ public class BenhNhanManager {
 
     public Object getAllBenhNhanDieuTri() throws ExceptionResponse {
         List<BenhNhan> listBenhNhan = benhNhanRepository.findAllByBenhNhanDieuTri();
-        if (listBenhNhan.size() <= 0) {
+        if (listBenhNhan == null || listBenhNhan.size() <= 0) {
             throw new ExceptionResponse(HttpStatus.FORBIDDEN, MessageResponse.VALUES_NOT_EXITS);
         }
         return new CommonResponse(HttpStatus.OK, listBenhNhan.stream().map(this::apply).collect(Collectors.toList()));
     }
 
     public Object getAllBenhNhan() throws ExceptionResponse {
-        List<BenhNhan> listBenhNhan = benhNhanRepository.findAll();
-        if (listBenhNhan.size() <= 0) {
+        try {
+            List<BenhNhan> listBenhNhan = benhNhanRepository.findAllBenhNhan();
+            if (listBenhNhan == null || listBenhNhan.size() <= 0) {
+                throw new ExceptionResponse(HttpStatus.FORBIDDEN, MessageResponse.VALUES_NOT_EXITS);
+            }
+            return new CommonResponse(HttpStatus.OK, listBenhNhan.stream().map(this::apply).collect(Collectors.toList()));
+        }catch (Exception ex){
+            ex.printStackTrace();
             throw new ExceptionResponse(HttpStatus.FORBIDDEN, MessageResponse.VALUES_NOT_EXITS);
         }
-        return new CommonResponse(HttpStatus.OK, listBenhNhan.stream().map(this::apply).collect(Collectors.toList()));
     }
 
     private BenhNhanResponse apply(BenhNhan benhNhan) {
@@ -202,9 +215,20 @@ public class BenhNhanManager {
         response.setSdt(benhNhan.getSdt());
         response.setDiaChi(benhNhan.getDiaChi());
         response.setTrangThai(benhNhan.getTrangThai());
+        response.setAmount(benhNhan.getAmount());
+        response.setPublicKey(benhNhan.getPublicKey());
         response.setToken(benhNhan.getToken());
         BenhAn benhAn = benhAnRepository.findOneByMaBN(benhNhan.getMaBN());
         response.setBenhAnResponse(exportBenhAn(benhAn));
+        List<DonThuoc> donThuocs = donThuocRepository.getDonThuocByMaBA(benhAn.getMaBA());
+        int chiPhi = 0;
+        if (donThuocs != null && donThuocs.size() > 0){
+            for (DonThuoc donThuoc : donThuocs){
+                chiPhi += donThuoc.getThanhTien();
+            }
+        }
+        chiPhi += benhAn.getChiPhi();
+        response.setVienPhi(chiPhi);
         return response;
     }
 
@@ -282,6 +306,15 @@ public class BenhNhanManager {
         if (benhNhan == null) {
             throw new ExceptionResponse(HttpStatus.UNAUTHORIZED, USER_NOT_EXIST);
         }
-        return new CommonResponse(HttpStatus.OK,apply(benhNhan));
+        return new CommonResponse(HttpStatus.OK, apply(benhNhan));
+    }
+
+    public Object getInfoByMaBn(String maBN) throws ExceptionResponse {
+        BenhNhan benhNhan = benhNhanRepository.findByMaBN(maBN);
+        if (benhNhan == null) {
+            throw new ExceptionResponse(HttpStatus.UNAUTHORIZED, USER_NOT_EXIST);
+        }
+        return new CommonResponse(HttpStatus.OK, apply(benhNhan));
+
     }
 }

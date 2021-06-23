@@ -100,6 +100,7 @@ public class BenhAnManager {
         response.setYeuCauThem(benhAn.getYeuCauThem());
         response.setChanDoanSauCung(benhAn.getChanDoanSauCung());
         response.setHuongDieuTri(benhAn.getHuongDieuTri());
+        response.setChiPhi(benhAn.getChiPhi());
         response.setPhongBenh(phongBenhRepository.findByMaPB(benhAn.getMaPB()));
         PhongKham pk = phongKhamRepository.findByMaPK(benhAn.getMaPK());
         if (pk != null){

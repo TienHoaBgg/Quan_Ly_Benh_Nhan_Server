@@ -77,4 +77,9 @@ public class BenhNhanManagerImpl implements BenhNhanManagerService {
         return manager.getInfoBenhNhan(phoneNumber);
     }
 
+    @Override
+    public Object getInfoByMabn(String maBN) throws ExceptionResponse {
+        return manager.getInfoByMaBn(maBN);
+    }
+
 }

@@ -13,6 +13,7 @@ public class AddBenhNhanRequest {
     private String ngheNghiep;
     private String diaChi;
     private String sdt;
+    private String publicKey;
     private BenhAn benhAn;
 
     public String getMaBN() {
@@ -87,6 +88,14 @@ public class AddBenhNhanRequest {
         this.sdt = sdt;
     }
 
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
+    }
+
     public BenhAn getBenhAn() {
         return benhAn;
     }
@@ -107,6 +116,7 @@ public class AddBenhNhanRequest {
         benhNhan.setNgheNghiep(this.getNgheNghiep());
         benhNhan.setDiaChi(this.getDiaChi());
         benhNhan.setSdt(this.getSdt());
+        benhNhan.setPublicKey(this.getPublicKey());
         return benhNhan;
     }
 
