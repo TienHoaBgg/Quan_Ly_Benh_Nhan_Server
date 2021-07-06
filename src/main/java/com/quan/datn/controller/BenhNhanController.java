@@ -35,6 +35,14 @@ public class BenhNhanController {
         return new ResponseEntity<>(service.getInfoBenhNhan(phoneNumber), HttpStatus.OK);
     }
 
+    @GetMapping(value = Constants.URL_BENH_NHAN_CHECK_PHONENUMBER)
+    public ResponseEntity checkPhoneNumber(
+            @RequestParam(value = "phoneNumber") String phoneNumber
+    ) throws ExceptionResponse {
+        return new ResponseEntity<>(service.checkPhoneNumber(phoneNumber), HttpStatus.OK);
+    }
+
+
     @GetMapping(value = Constants.URL_BENH_NHAN_GET_INFO_MABN)
     public ResponseEntity getInfoByMabn(
             @RequestParam(value = "mabn") String maBN

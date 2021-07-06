@@ -35,4 +35,6 @@ public interface BenhNhanManagerService {
     Object getInfoBenhNhan(String phoneNumber) throws ExceptionResponse;
 
     Object getInfoByMabn(String maBN) throws ExceptionResponse;
+
+    Object checkPhoneNumber(String phoneNumber) throws ExceptionResponse;
 }

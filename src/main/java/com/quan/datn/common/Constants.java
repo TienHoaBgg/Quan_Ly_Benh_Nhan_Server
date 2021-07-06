@@ -30,6 +30,8 @@ public interface Constants {
     String NHAP_VIEN = "/nhapvien";
     String GET_INFO = "/get-info";
     String GET_INFO_MABN = "/get-info-by-mabn";
+    String PHONENUMBER = "/check-phone-number";
+
 
     String URL_GET_ALL_BENHNHAN_DIEU_TRI = API + BENHNHAN + GET_BENHNHAN_DIEU_TRI;
     String URL_GET_ALL_BENHNHAN_CHO = API + BENHNHAN + GET_BENHNHAN_CHO;
@@ -44,6 +46,7 @@ public interface Constants {
     String URL_BENH_NHAN_NHAP_VIEN = API + BENHNHAN + NHAP_VIEN;
     String URL_BENH_NHAN_GET_INFO = API + BENHNHAN + GET_INFO;
     String URL_BENH_NHAN_GET_INFO_MABN = API + BENHNHAN + GET_INFO_MABN;
+    String URL_BENH_NHAN_CHECK_PHONENUMBER = API + BENHNHAN + PHONENUMBER;
 
     ///==================================================
     // Phong Kham

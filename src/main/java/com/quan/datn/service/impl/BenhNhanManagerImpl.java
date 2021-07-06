@@ -82,4 +82,9 @@ public class BenhNhanManagerImpl implements BenhNhanManagerService {
         return manager.getInfoByMaBn(maBN);
     }
 
+    @Override
+    public Object checkPhoneNumber(String phoneNumber) throws ExceptionResponse {
+        return manager.checkPhoneNumber(phoneNumber);
+    }
+
 }

@@ -317,4 +317,12 @@ public class BenhNhanManager {
         return new CommonResponse(HttpStatus.OK, apply(benhNhan));
 
     }
+
+    public Object checkPhoneNumber(String phoneNumber) throws ExceptionResponse {
+        BenhNhan benhNhan = benhNhanRepository.findByPhoneNumber(phoneNumber);
+        if (benhNhan == null) {
+            throw new ExceptionResponse(HttpStatus.UNAUTHORIZED, USER_NOT_EXIST);
+        }
+        return new CommonResponse(HttpStatus.OK, USER_EXIST);
+    }
 }
