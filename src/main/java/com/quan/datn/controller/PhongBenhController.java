@@ -29,7 +29,7 @@ public class PhongBenhController {
         return new ResponseEntity<>(service.addPhongBenh(request),HttpStatus.OK);
     }
 
-    @GetMapping(value = Constants.URL_DELETE_PHONG_BENH)
+    @DeleteMapping(value = Constants.URL_DELETE_PHONG_BENH)
     public Object deletePhongBenh(
             @RequestParam("mapb") String maPB
     ) throws ExceptionResponse {

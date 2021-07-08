@@ -44,7 +44,7 @@ public class NhanVienController {
         return new ResponseEntity<>(service.updateNhanVien(updateRequest,file), HttpStatus.OK);
     }
 
-    @GetMapping(value = Constants.URL_DELETE_NHAN_VIEN)
+    @DeleteMapping(value = Constants.URL_DELETE_NHAN_VIEN)
     public Object deletePhongBenh(
             @RequestParam("manv") String maNV
     ) throws ExceptionResponse {

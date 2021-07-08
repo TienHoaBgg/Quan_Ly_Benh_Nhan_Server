@@ -1,10 +1,9 @@
 package com.quan.datn.model.database;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jdk.nashorn.internal.ir.annotations.Reference;
+
+import javax.persistence.*;
 
 @Entity(name = "donthuoc")
 public class DonThuoc {
@@ -12,12 +11,36 @@ public class DonThuoc {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "MABA")
     private String maBA;
+
+    @Column(name = "TENTHUOC")
     private String tenThuoc;
+
+    @Column(name = "SOLUONG")
     private int soLuong;
+
+    @Column(name = "DONGIA")
     private float donGia;
+
+    @Column(name = "THANHTIEN")
     private float thanhTien;
+
+    @Column(name = "HUONGDAN")
     private String huongDan;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "MABA", referencedColumnName = "MABA", insertable = false, updatable = false)
+    private BenhAn benhAn;
+
+    public BenhAn getBenhAn() {
+        return benhAn;
+    }
+
+    public void setBenhAn(BenhAn benhAn) {
+        this.benhAn = benhAn;
+    }
 
     public int getId() {
         return id;

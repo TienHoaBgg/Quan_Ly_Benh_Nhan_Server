@@ -31,7 +31,7 @@ public class PhongKhamController {
         return new ResponseEntity<>(service.addPhongKham(request),HttpStatus.OK);
     }
 
-    @GetMapping(value = Constants.URL_DELETE_PHONG_KHAM)
+    @DeleteMapping(value = Constants.URL_DELETE_PHONG_KHAM)
     public Object deletePhongKham(
             @RequestParam("mapk") String maPK
     ) throws ExceptionResponse {

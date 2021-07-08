@@ -73,7 +73,7 @@ public class BenhNhanController {
         return new ResponseEntity<>(service.addBenhNhan(AddBenhNhanRequest,file),HttpStatus.OK);
     }
 
-    @GetMapping(value = Constants.URL_DELETE_BENHNHAN)
+    @DeleteMapping(value = Constants.URL_DELETE_BENHNHAN)
     public Object deleteBenhNhan(
             @RequestParam(value = "mabn") String MaBN
     ) throws ExceptionResponse {
